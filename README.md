@@ -1,6 +1,6 @@
 # heimdall-vuetify
 
-https://github.com/djhaynes/heimdall-vuetify/workflows/build-workflow/badge.svg
+https://github.com/djhaynes/heimdall-vuetify/workflows/workflow/badge.svg
 
 
 ## Project setup
