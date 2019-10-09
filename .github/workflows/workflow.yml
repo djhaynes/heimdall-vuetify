@@ -15,9 +15,6 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: npm serve
-        run: |
-          npm run serve
       - name: npm build
         run: |
           npm run build
