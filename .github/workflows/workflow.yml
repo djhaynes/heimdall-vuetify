@@ -5,7 +5,7 @@ on:
     
 jobs:
   test:
-    name: Test on the latest MacOS 
+    name: Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
