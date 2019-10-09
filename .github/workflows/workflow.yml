@@ -2,18 +2,15 @@ name: Heimdall Vuetify Workflow
 on:
   push:
   pull_request:
-    
 jobs:
   test:
     name: Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, windows-2019, windows-2016, ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macOS-latest, macOS-10.14]
-        node: [4, 6, 8, 10]
-
-
-
+        os: [windows-latest]
+        #os: [windows-latest, windows-2019, windows-2016, ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macOS-latest, macOS-10.14]
+        #node: [4, 6, 8, 10]
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node }} on ${{ matrix.os }}
@@ -30,9 +27,9 @@ jobs:
       - name: npm lint
         run: |
           npm run lint
-      #- name: npm unit test
-      #  run: |
-      #    npm run test:unit
+      - name: npm unit test
+        run: |
+          npm run test:unit
         env:
           CI: true
         
