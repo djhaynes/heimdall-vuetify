@@ -8,8 +8,8 @@ on:
 
 jobs:
   template: |
-      ## What’s Changed
-      $CHANGES
+    ## What’s Changed
+    $CHANGES
   update_draft_release:
     runs-on: ubuntu-latest
     steps:
