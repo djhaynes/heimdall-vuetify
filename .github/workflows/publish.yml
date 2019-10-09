@@ -1,20 +1,20 @@
-name: Heimdall Vuetify Publish Workflow
+name: Publish
+
 on:
   push:
-  pull_request:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+
 jobs:
-  test:
-    name: Test
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-        #os: [windows-latest, windows-2019, windows-2016, ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macOS-latest, macOS-10.14]
-        #node: [4, 6, 8, 10]
-        steps:
-          - uses: actions/checkout@v1
-          - uses: actions/setup-node@v1
-          - uses: jgierer12/npm-auth-gpr@v1
-            with:
-              token: ${{ secrets.GITHUB_TOKEN }}
-          - run: npm publish
+  update_draft_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+      - uses: jgierer12/npm-auth-gpr@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm publish
