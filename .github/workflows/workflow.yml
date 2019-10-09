@@ -24,9 +24,9 @@ jobs:
       - name: npm lint
         run: |
           npm run lint
-      - name: npm unit test
-        run: |
-          npm run test:unit
+      #- name: npm unit test
+      #  run: |
+      #    npm run test:unit
         env:
           CI: true
         
