@@ -1,5 +1,8 @@
 # heimdall-vuetify
 
+https://github.com/djhaynes/heimdall-vuetify/workflows/build-workflow/badge.svg
+
+
 ## Project setup
 ```
 npm install
