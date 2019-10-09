@@ -12,9 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
       - uses: jgierer12/npm-auth-gpr@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish
