@@ -1,4 +1,6 @@
-# heimdall-vuetify ![](https://github.com/djhaynes/heimdall-vuetify/workflows/Heimdall%20Vuetify%20Workflow/badge.svg)
+# heimdall-vuetify 
+![](https://github.com/djhaynes/heimdall-vuetify/workflows/Heimdall%20Vuetify%20Workflow/badge.svg)
+![](https://github.com/djhaynes/heimdall-vuetify/workflows/.github/workflows/workflow.yml/badge.svg)
 
 ## Project setup
 ```
