@@ -25,6 +25,7 @@ jobs:
         run: |
           #export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           github_changelog_generator -u djhaynes -p heimdall-vuetify
+          cat CHANGELOG.md
       - name: push
         uses: github-actions-x/commit@v2.1
         with:
