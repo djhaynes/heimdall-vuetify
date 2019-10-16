@@ -26,6 +26,7 @@ jobs:
           gem install github_changelog_generator
       - name: run github_changelog_generator on repo
         run: |
+          git pull
           export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           github_changelog_generator -u djhaynes -p heimdall-vuetify
           #cat CHANGELOG.md
