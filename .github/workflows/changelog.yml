@@ -20,16 +20,12 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}   
       - name: install github_changelog_generator
         run: |
-          echo "PWD"
-          pwd
-          echo "PWD"
           gem install github_changelog_generator
       - name: run github_changelog_generator on repo
         run: |
           git pull origin master
           export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           github_changelog_generator -u djhaynes -p heimdall-vuetify
-          #cat CHANGELOG.md
       - name: push
         uses: github-actions-x/commit@v2.1
         with:
