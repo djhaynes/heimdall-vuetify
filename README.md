@@ -1,5 +1,8 @@
-# heimdall-vuetify ![](https://github.com/djhaynes/heimdall-vuetify/workflows/Heimdall%20Vuetify%20Workflow/badge.svg)
+![](https://github.com/djhaynes/heimdall-vuetify/workflows/Heimdall%20Vuetify%20Workflow/badge.svg)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2b914cc2-27b8-4469-86bb-32bfad03aaa1/deploy-status)](https://app.netlify.com/sites/heimdall-vuetify/deploys)
+
+# heimdall-vuetify
 
 ## Project setup
 ```

@@ -20,3 +20,39 @@ $code-kbd-font-weight: false;
 .theme--light {
 	@import "~prismjs/themes/prism";
 }
+
+/* Backgrounds (root) */
+.theme--dark.v-application {
+  background: var(--v-secondary-base);
+}
+
+.theme--light.v-application {
+  background: var(--v-secondary-base);
+}
+
+/** Backgrounds (middle) */
+.theme--dark.v-card,
+.theme--dark.v-navigation-drawer,
+.theme--dark .v-dialog {
+  background: var(--v-secondary-lighten1);
+  background-color: var(--v-secondary-lighten1);
+  color: var(--v-secondary-visible-lighten1);
+}
+
+.theme--light.v-card,
+.theme--light.v-navigation-drawer,
+.theme--light .v-dialog {
+  background: var(--v-secondary-lighten1);
+  background-color: var(--v-secondary-lighten1);
+  color: var(--v-secondary-visible-lighten1);
+}
+
+.container {
+  background-color: inherit;
+}
+
+/** Foreground */
+.foreground .v-card {
+  background: var(--v-secondary-lighten2) !important;
+  background-color: var(--v-secondary-lighten2) !important;
+}

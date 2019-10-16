@@ -1,5 +1,5 @@
 <template>
-  <BaseView>
+  <BaseView :title="curr_title">
     <!-- Topbar config - give it a search bar -->
     <template #topbar-content>
       <v-text-field
@@ -10,20 +10,42 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
         v-model="search_term"
+        clearable
       ></v-text-field>
       <v-spacer />
-      <v-btn @click="clear" title="Clear all set filters">Clear</v-btn>
+      <v-btn @click="dialog = true" :disabled="dialog" class="mx-2">
+        Upload
+        <v-icon class="pl-2">
+          cloud_upload
+        </v-icon>
+      </v-btn>
+      <v-btn
+        class="mx-2"
+        @click="clear"
+        title="Clear all set filters"
+        :disabled="!can_clear"
+      >
+        Clear
+      </v-btn>
+    </template>
+
+    <!-- Custom sidebar content -->
+    <template #sidebar-content-tools>
+      <ExportCaat :filter="all_filter"></ExportCaat>
     </template>
 
     <!-- The main content: cards, etc -->
     <template #main-content>
       <v-container fluid grid-list-md pa-2>
         <!-- Count Cards -->
-        <StatusCardRow :filter="all_filter" />
+        <StatusCardRow
+          :filter="all_filter"
+          @show-errors="status_filter = 'Profile Error'"
+        />
 
         <!-- Compliance Cards -->
         <v-row justify="space-around">
-          <v-col xs-4>
+          <v-col xs="4">
             <v-card class="fill-height">
               <v-card-title class="justify-center">Status Counts</v-card-title>
               <v-card-actions class="justify-center">
@@ -31,7 +53,7 @@
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col xs-4>
+          <v-col xs="4">
             <v-card class="fill-height">
               <v-card-title class="justify-center"
                 >Severity Counts</v-card-title
@@ -41,7 +63,7 @@
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col xs-4>
+          <v-col xs="4">
             <v-card class="fill-height">
               <v-card-title class="justify-center"
                 >Compliance Level</v-card-title
@@ -57,10 +79,17 @@
           </v-col>
         </v-row>
 
+        <!-- Profile information -->
+        <v-row>
+          <v-col xs-12>
+            <ProfileData :filter="all_filter" />
+          </v-col>
+        </v-row>
+
         <!-- TreeMap and Partition Map -->
         <v-row>
           <v-col xs-12>
-            <v-card elevation="2" title="test">
+            <v-card elevation="2">
               <v-card-title>TreeMap</v-card-title>
               <v-card-text>
                 <Treemap
@@ -85,21 +114,6 @@
       </v-container>
     </template>
 
-    <!-- File select modal toggle -->
-
-    <v-btn
-      bottom
-      color="teal"
-      dark
-      fab
-      fixed
-      right
-      @click="dialog = true"
-      :hidden="dialog"
-    >
-      <v-icon large>mdi-plus-circle</v-icon>
-    </v-btn>
-
     <!-- File select modal -->
     <UploadNexus v-model="dialog" @got-files="on_got_files" />
   </BaseView>
@@ -117,10 +131,14 @@ import Treemap from "@/components/cards/treemap/Treemap.vue";
 import StatusChart from "@/components/cards/StatusChart.vue";
 import SeverityChart from "@/components/cards/SeverityChart.vue";
 import ComplianceChart from "@/components/cards/ComplianceChart.vue";
+import ProfileData from "@/components/cards/ProfileData.vue";
+import ExportCaat from "@/components/global/ExportCaat.vue";
 
 import { Filter, NistMapState } from "@/store/data_filters";
 import { ControlStatus, Severity } from "inspecjs";
 import { FileID } from "@/store/report_intake";
+import { getModule } from "vuex-module-decorators";
+import InspecDataModule from "../store/data_store";
 
 // We declare the props separately
 // to make props types inferrable.
@@ -137,7 +155,9 @@ const ResultsProps = Vue.extend({
     ControlTable,
     StatusChart,
     SeverityChart,
-    ComplianceChart
+    ComplianceChart,
+    ProfileData,
+    ExportCaat
   }
 })
 export default class Results extends ResultsProps {
@@ -230,6 +250,38 @@ export default class Results extends ResultsProps {
       selectedCategory: null,
       selectedControlID: null
     };
+  }
+
+  /**
+   * Returns true if we can currently clear.
+   * Essentially, just controls whether the button is available
+   */
+  get can_clear(): boolean {
+    // Return if any params not null/empty
+    if (
+      this.severity_filter ||
+      this.status_filter ||
+      this.search_term !== "" ||
+      this.nist_filters.selectedFamily
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * The title to override with
+   */
+  get curr_title(): String | undefined {
+    if (this.file_filter !== null) {
+      let store = getModule(InspecDataModule, this.$store);
+      let file = store.allFiles.find(f => f.unique_id === this.file_filter);
+      if (file) {
+        return file.filename;
+      }
+    }
+    return undefined;
   }
 
   /**

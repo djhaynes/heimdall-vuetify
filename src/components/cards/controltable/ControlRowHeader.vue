@@ -2,16 +2,11 @@
   <!-- Need to catch for ResponsiveRowSwitch @toggle events for small view -->
   <ResponsiveRowSwitch>
     <template #status>
-      <v-card
-        class="ma-1"
-        :color="status_color"
-        hover
-        @click="$emit('toggle', !expanded)"
-      >
+      <v-card :color="status_color" hover @click="$emit('toggle', !expanded)">
         <v-card-text class="pa-2">
           {{ control.status }}
           <v-icon class="float-right">{{
-            expanded ? "mdi-chevron-down" : "mdi-chevron-up"
+            expanded ? "mdi-chevron-up" : "mdi-chevron-down"
           }}</v-icon>
         </v-card-text>
       </v-card>
@@ -115,14 +110,7 @@ export default class ControlRowHeader extends ControlRowHeaderProps {
 </script>
 
 <style scoped>
-.center {
-  text-align: justify;
-}
-
-.stack-icon {
-  margin-left: -8px;
-  margin-right: -8px;
-  margin-top: -8px;
-  margin-bottom: -8px;
+.lightened-row .v-card {
+  background: var(--v-background-lighten-2);
 }
 </style>

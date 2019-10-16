@@ -192,11 +192,9 @@ export default class S3Reader extends Props {
     if (this.shown_window === "FullyAuthed") {
       await this.fetch_files().then(
         files => {
-          console.log("Got files");
           this.files = files;
         },
         error => {
-          console.log("Failed to get files");
           this.files = [];
           this.handle_error(error);
         }
@@ -220,11 +218,9 @@ export default class S3Reader extends Props {
     let attempt: Promise<AuthCreds>;
     if (this.shown_window === "BaseAuth") {
       // Try with MFA!
-      console.log("Trying to auth with mfa");
       attempt = this.assume_role(true);
     } else {
       // Try without
-      console.log("Trying to auth without mfa");
       attempt = this.assume_role(false);
     }
     await attempt.then(
@@ -395,10 +391,11 @@ export default class S3Reader extends Props {
     switch (code) {
       case "TokenRefreshRequired":
       case "ExpiredToken":
-        this.shown_window = "BaseAuth";
-        this.shown_error =
-          "MFA Authorization expired. Please input fresh token.";
+        this.shown_window = "NoAuth";
+        this.shown_error = "Authorization expired. Please input fresh token.";
         this.mfa_token = "";
+        this.assumed_role_creds = null;
+        this.refresh();
         break;
       case "InvalidAccessKeyId":
         this.shown_window = "NoAuth";
