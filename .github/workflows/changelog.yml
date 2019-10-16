@@ -20,7 +20,6 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}   
       - name: get updates
         run: |
-          git fetch upstream
           git pull --rebase
       - name: install github_changelog_generator
         run: |
