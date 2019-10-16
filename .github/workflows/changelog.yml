@@ -20,6 +20,9 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}   
       - name: install github_changelog_generator
         run: |
+          echo "PWD"
+          pwd
+          echo "PWD"
           gem install github_changelog_generator
       - name: run github_changelog_generator on repo
         run: |
