@@ -1,6 +1,6 @@
 **Release:** 
-0.23.0
+0.24.0
 <br><br>**Date:** 
-2019-10-16 09:52:45 -0400
+2019-10-16 10:30:39 -0400
 <br><br>**Commit:** 
-b5d6e5e41ccf87aa84ef428e2ef563dafba32487
+cbf1043cfad28f23c323c47f0b5cb8ddf85bcde6
