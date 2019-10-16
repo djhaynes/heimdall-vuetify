@@ -23,7 +23,7 @@ jobs:
           gem install github_changelog_generator
       - name: run github_changelog_generator on repo
         run: |
-          export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          #export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           github_changelog_generator -u djhaynes -p heimdall-vuetify
       - name: push
         uses: github-actions-x/commit@v2.1
