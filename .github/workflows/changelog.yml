@@ -1,1 +1,38 @@
+name: Changelog Generator
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        ruby: [2.4]
+    steps:
+      - name: Use Ruby ${{ matrix.ruby }} on ${{ matrix.os }}
+        uses: actions/setup-ruby@v1
+      - name: get repo
+        uses: actions/checkout@v1  
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}   
+      - name: install changelog-generator
+        run: |
+          gem install github_changelog_generator
+      - name: run github_changelog_generator
+        run: |
+          export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          github_changelog_generator -u djhaynes -p heimdall-vuetify
+      - name: push
+        uses: github-actions-x/commit@v2.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'publish changelog'
+          force-add: 'true'
+        env:
+          CI: true
 
