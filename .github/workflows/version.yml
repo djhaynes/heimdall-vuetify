@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - name: Checkout heimdall_vuetify
+      - name: Checkout heimdall-vuetify
         uses: actions/checkout@v1  
         with:
           token: ${{secrets.GITHUB_TOKEN}}   
