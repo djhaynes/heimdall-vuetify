@@ -1,4 +1,4 @@
-name: Version Generator
+name: Generate VERSION.md
 on:
   push:
     # branches to consider in the event; optional, defaults to all
@@ -12,11 +12,11 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - name: get repo
+      - name: Checkout heimdall_vuetify
         uses: actions/checkout@v1  
         with:
           token: ${{secrets.GITHUB_TOKEN}}   
-      - name: get version information
+      - name: Get information for VERSION.md
         run: |
           echo "**Release:** " > VERSION.md
           git describe --tags $(git rev-list --tags --max-count=1) >> VERSION.md
@@ -24,7 +24,7 @@ jobs:
           git show -s --format=%ci $(git rev-list --tags --max-count=1) >> VERSION.md
           echo "<br><br>**Commit:** " >> VERSION.md
           git rev-list --tags --max-count=1 >> VERSION.md
-      - name: push
+      - name: Commit and push changes to VERSION.md
         uses: github-actions-x/commit@v2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
