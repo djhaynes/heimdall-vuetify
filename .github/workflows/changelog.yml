@@ -1,4 +1,4 @@
-name: Changelog Generator
+name: Generate CHANGELOG.md
 on:
   push:
     branches:
@@ -14,19 +14,19 @@ jobs:
     steps:
       - name: Use Ruby ${{ matrix.ruby }} on ${{ matrix.os }}
         uses: actions/setup-ruby@v1
-      - name: get repo
+      - name: Checkout heimdall-vuetify
         uses: actions/checkout@v1  
         with:
           token: ${{secrets.GITHUB_TOKEN}}   
-      - name: install github_changelog_generator
+      - name: Install github_changelog_generator
         run: |
           gem install github_changelog_generator
-      - name: run github_changelog_generator on repo
+      - name: Run github_changelog_generator 
         run: |
           git pull origin master
           export CHANGELOG_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           github_changelog_generator -u djhaynes -p heimdall-vuetify
-      - name: push
+      - name: Commit and push changes to CHANGELOG.md
         uses: github-actions-x/commit@v2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
