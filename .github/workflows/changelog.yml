@@ -5,14 +5,10 @@ on:
       - master
 jobs:
   test:
-    name: Test
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        ruby: [2.4]
+    name: Generate CHANGELOG.md
+    runs-on: ubuntu-latest
     steps:
-      - name: Use Ruby ${{ matrix.ruby }} on ${{ matrix.os }}
+      - name: Setup ruby
         uses: actions/setup-ruby@v1
       - name: Checkout heimdall-vuetify
         uses: actions/checkout@v1  
