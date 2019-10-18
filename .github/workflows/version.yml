@@ -15,6 +15,7 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}   
       - name: Get information for VERSION.md
         run: |
+          git pull origin master
           echo "**Release:** " > VERSION.md
           git describe --tags $(git rev-list --tags --max-count=1) >> VERSION.md
           echo "<br><br>**Date:** " >> VERSION.md
