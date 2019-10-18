@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: 'master'
-          commit-message: 'publish version information'
+          commit-message: 'Publish version information'
           force-add: 'true'
         env:
           CI: true
