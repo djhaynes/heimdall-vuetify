@@ -1,7 +1,6 @@
 name: heimdall-vuetify
 on:
   push:
-  pull_request:
 jobs:
   test:
     name: Build and test heimdall-vuetify
