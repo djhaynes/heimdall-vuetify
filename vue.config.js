@@ -15,7 +15,7 @@ module.exports = {
   //publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   publicPath: process.env.NODE_ENV === "production"
   ? "heimdall-vuetify"
-  : "/"
+  : "/",
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
