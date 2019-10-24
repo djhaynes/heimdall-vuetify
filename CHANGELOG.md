@@ -1,5 +1,8 @@
 # Change Log
 
+## [v0.52.13](https://github.com/djhaynes/heimdall-vuetify/tree/v0.52.13) (2019-10-24)
+[Full Changelog](https://github.com/djhaynes/heimdall-vuetify/compare/v0.52.12...v0.52.13)
+
 ## [v0.52.12](https://github.com/djhaynes/heimdall-vuetify/tree/v0.52.12) (2019-10-24)
 [Full Changelog](https://github.com/djhaynes/heimdall-vuetify/compare/v0.52.11...v0.52.12)
 
